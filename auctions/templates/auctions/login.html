@@ -1,0 +1,30 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <div style="max-width: 400px; margin: 40px auto; background-color: #f8f9fa; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+        
+        <h2 style="text-align: center; color: #4B0082; font-weight: bold; margin-bottom: 25px;">🔐 Login to The Book Stop</h2>
+
+        {% if message %}
+            <div class="alert alert-danger" role="alert" style="text-align: center;">
+                {{ message }}
+            </div>
+        {% endif %}
+
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <input autofocus class="form-control" type="text" name="username" placeholder="Username" required style="border-radius: 8px;">
+            </div>
+            <div class="form-group mt-3">
+                <input class="form-control" type="password" name="password" placeholder="Password" required style="border-radius: 8px;">
+            </div>
+            <input class="btn btn-primary btn-block mt-4" type="submit" value="Login" style="border-radius: 20px;">
+        </form>
+
+        <p class="mt-4 text-center" style="font-size: 0.95rem;">
+            Don't have an account? 
+            <a href="{% url 'register' %}" style="color: #4B0082; font-weight: 500;">Register here</a>.
+        </p>
+    </div>
+{% endblock %}

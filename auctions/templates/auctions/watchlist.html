@@ -1,0 +1,25 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2 style="color: #4B0082; font-weight: bold; text-align: center; margin: 20px 0;">⭐ Your Watchlist</h2>
+
+    <div class="row mx-2">
+        {% for listing in watchlist_items %}
+            <div class="col-md-4 mb-4 d-flex">
+                <div class="card flex-fill d-flex flex-column" style="border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                    <img src="{{ listing.image_url }}" class="card-img-top" alt="{{ listing.title }}"
+                         style="height: 280px; object-fit: cover; border-top-left-radius: 12px; border-top-right-radius: 12px;">
+                    <div class="card-body d-flex flex-column" style="padding: 15px;">
+                        <h5 class="card-title" style="color: #4B0082;">{{ listing.title }}</h5>
+                        <p class="card-text flex-grow-1" style="color: #444;">{{ listing.description|truncatewords:20 }}</p>
+                        <a href="{% url 'listing' id=listing.id %}" class="btn btn-outline-primary mt-auto" style="border-radius: 20px;">🔍 View Details</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <p class="text-muted text-center mt-4" style="font-size: 1.1rem;">Your watchlist is empty.</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

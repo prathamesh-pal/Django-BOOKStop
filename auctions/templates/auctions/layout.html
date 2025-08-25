@@ -1,0 +1,59 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}📔	The Book Stop{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+</head>
+<body style="background-color: #f9f9f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+
+    <div class="container mt-4 p-4" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+        <h1 style="text-align: center; color: #4B0082; font-weight: bold;">📚 The Book Stop</h1>
+
+        <div style="text-align: right; font-size: 0.9em; color: #555;">
+            {% if user.is_authenticated %}
+                Signed in as <strong>{{ user.username }}</strong>.
+            {% else %}
+                Not signed in.
+            {% endif %}
+        </div>
+
+        <nav class="my-3">
+            <ul class="nav justify-content-center" style="background-color: #f0f0f0; border-radius: 8px; padding: 10px;">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'index' %}" style="color: #4B0082; font-weight: 500;">Active Listings</a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'create_listing' %}" style="color: #4B0082; font-weight: 500;">Create Listing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'watchlist' %}" style="color: #4B0082; font-weight: 500;">Watchlist</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}" style="color: crimson; font-weight: 500;">Log Out</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}" style="color: #4B0082; font-weight: 500;">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}" style="color: #4B0082; font-weight: 500;">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+
+        <hr style="border-top: 1px solid #ddd;">
+
+        <div style="padding: 20px;">
+            {% block body %}
+            {% endblock %}
+        </div>
+    </div>
+
+</body>
+</html>
